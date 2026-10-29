@@ -1,0 +1,113 @@
+-- 001_initial_schema.sql
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TYPE enquiry_status AS ENUM ('New', 'Contacted', 'Estimate Pending', 'In Progress', 'Completed', 'Closed');
+
+CREATE TABLE IF NOT EXISTS business_profiles (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  business_name TEXT NOT NULL,
+  slug TEXT NOT NULL UNIQUE,
+  description TEXT,
+  phone TEXT,
+  whatsapp_phone TEXT,
+  address TEXT,
+  postal_code TEXT,
+  google_business_url TEXT,
+  directions_url TEXT,
+  experience_years INTEGER,
+  logo_url TEXT,
+  hero_image_url TEXT,
+  email TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS business_hours (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  business_profile_id UUID REFERENCES business_profiles(id) ON DELETE CASCADE,
+  day_of_week INTEGER NOT NULL CHECK (day_of_week BETWEEN 0 AND 6),
+  opens_at TIME,
+  closes_at TIME,
+  is_closed BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS services (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title TEXT NOT NULL,
+  slug TEXT NOT NULL UNIQUE,
+  short_description TEXT,
+  description TEXT,
+  cover_image_url TEXT,
+  is_published BOOLEAN DEFAULT FALSE,
+  display_order INTEGER DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS projects (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title TEXT NOT NULL,
+  slug TEXT NOT NULL UNIQUE,
+  category TEXT,
+  description TEXT,
+  cover_image_url TEXT,
+  is_published BOOLEAN DEFAULT FALSE,
+  completed_at DATE,
+  display_order INTEGER DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS project_images (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
+  image_url TEXT NOT NULL,
+  alt_text TEXT,
+  display_order INTEGER DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS enquiries (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  customer_name TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  email TEXT,
+  service_id UUID REFERENCES services(id),
+  project_location TEXT,
+  project_description TEXT,
+  preferred_contact_method TEXT,
+  status enquiry_status DEFAULT 'New',
+  internal_notes TEXT,
+  follow_up_at TIMESTAMPTZ,
+  consent_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS faqs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  question TEXT NOT NULL,
+  answer TEXT,
+  category TEXT,
+  is_published BOOLEAN DEFAULT FALSE,
+  display_order INTEGER DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS admin_profiles (
+  id UUID PRIMARY KEY,
+  display_name TEXT,
+  role TEXT DEFAULT 'admin',
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_business_hours_profile_id ON business_hours(business_profile_id);
+CREATE INDEX IF NOT EXISTS idx_services_display_order ON services(display_order);
+CREATE INDEX IF NOT EXISTS idx_projects_display_order ON projects(display_order);
+CREATE INDEX IF NOT EXISTS idx_enquiries_status ON enquiries(status);
+CREATE INDEX IF NOT EXISTS idx_enquiries_created_at ON enquiries(created_at);
+CREATE INDEX IF NOT EXISTS idx_faqs_published ON faqs(is_published);
