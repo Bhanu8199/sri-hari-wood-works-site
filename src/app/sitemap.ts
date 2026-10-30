@@ -1,12 +1,18 @@
-import type { Metadata } from 'next';
+import type { MetadataRoute } from 'next';
+import { featuredProjects } from '@/lib/site-data';
 
-export const metadata: Metadata = {
-  title: 'Site map',
-  description: 'Sitemap for Sri Hari Wood Works'
-};
+export default function sitemap(): MetadataRoute.Sitemap {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const routes = ['/', '/services', '/projects', '/about', '/contact', '/reviews', '/faq', '/privacy'];
 
-export default function SiteMap() {
-  return null;
+  return [
+    ...routes.map((route) => ({
+      url: new URL(route, siteUrl).toString(),
+      lastModified: new Date()
+    })),
+    ...featuredProjects.map((project) => ({
+      url: new URL(`/projects/${project.slug}`, siteUrl).toString(),
+      lastModified: new Date()
+    }))
+  ];
 }
-
-export const dynamic = 'force-static';

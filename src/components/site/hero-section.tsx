@@ -1,29 +1,33 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight, MapPin } from 'lucide-react';
 
-export function HeroSection() {
+export function HeroSection({ serviceArea, baseLocation }: { serviceArea: string; baseLocation: string }) {
   return (
-    <section className="container-shell grid gap-8 py-12 md:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+    <section className="container-shell grid gap-8 py-10 md:py-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-olive">Professional carpentry & woodworking</p>
-        <h1 className="mt-4 max-w-xl text-4xl font-semibold tracking-tight text-walnut md:text-6xl">Craftsmanship Built on 37 Years of Experience.</h1>
-        <p className="mt-5 max-w-xl text-lg leading-8 text-slate-700">Custom woodworking and carpentry services for your home, built around your requirements.</p>
+        <p className="inline-flex items-center gap-2 rounded-full bg-[#eadcc5] px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-walnut">
+          <MapPin className="h-4 w-4" aria-hidden="true" />
+          Based in {baseLocation} · Serving {serviceArea}
+        </p>
+        <h1 className="mt-5 max-w-[700px] text-[2.5rem] font-semibold tracking-tight text-walnut">End-to-End Custom Woodwork, Perfected Over 37 Years of Mastery.</h1>
+        <p className="mt-5 max-w-xl text-lg leading-[1.6] text-slate-700">Complete residential woodwork solutions—custom wardrobes, ergonomic modular kitchens, and handcrafted furniture tailored precisely to your floor plan and finish preferences.</p>
         <div className="mt-8 flex flex-wrap gap-4">
           <Link href="/contact" className="btn-primary">Request an Estimate</Link>
-          <Link href="/projects" className="btn-secondary">Explore Our Work</Link>
+          <Link href="/projects" className="btn-secondary inline-flex items-center gap-2">Explore Our Work <ArrowUpRight className="h-4 w-4" /></Link>
         </div>
+        <p className="mt-5 text-sm font-medium text-slate-700">37 years of hands-on woodworking experience.</p>
       </div>
 
-      <div className="relative overflow-hidden rounded-[32px] border border-border bg-white p-3 shadow-soft">
-        <div className="relative h-[480px] overflow-hidden rounded-[26px]">
-          <Image
-            src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
-            alt="Premium woodworking craftsmanship placeholder"
-            fill
-            className="object-cover"
-          />
-        </div>
+      <div className="relative min-h-[360px] overflow-hidden rounded-[32px] border border-[#d8c39d] bg-[#f5ecdc] shadow-soft md:min-h-[480px]">
+        <Image
+          src="/images/sri-hari-wood-works-emblem.png"
+          alt="Carved wooden Vinayaka emblem with the Sri Hari Wood Works name."
+          fill
+          priority
+          sizes="(min-width: 1024px) 45vw, 100vw"
+          className="object-contain"
+        />
       </div>
     </section>
   );

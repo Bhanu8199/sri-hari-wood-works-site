@@ -1,21 +1,26 @@
 'use client';
 
 import { useState } from 'react';
+import { featuredServices } from '@/lib/site-data';
+import type { Service } from '@/types';
 
 const defaultValues = {
   name: '',
   phone: '',
   email: '',
-  service: 'Residential carpentry',
+  service: featuredServices[0].title,
   projectLocation: '',
   projectDescription: '',
   preferredContactMethod: 'Phone',
   consent: true
 };
 
-export function EnquiryForm({ defaultService }: { defaultService?: string }) {
+export function EnquiryForm({ defaultService, services = featuredServices }: { defaultService?: string; services?: Service[] }) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const selectedService = services.find(
+    (service) => service.slug === defaultService || service.title === defaultService
+  )?.title || defaultValues.service;
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -25,7 +30,7 @@ export function EnquiryForm({ defaultService }: { defaultService?: string }) {
       name: String(formData.get('name') || ''),
       phone: String(formData.get('phone') || ''),
       email: String(formData.get('email') || ''),
-      service: String(formData.get('service') || defaultService || 'General enquiry'),
+      service: String(formData.get('service') || selectedService),
       projectLocation: String(formData.get('projectLocation') || ''),
       projectDescription: String(formData.get('projectDescription') || ''),
       preferredContactMethod: String(formData.get('preferredContactMethod') || 'Phone'),
@@ -35,23 +40,29 @@ export function EnquiryForm({ defaultService }: { defaultService?: string }) {
     setStatus('loading');
     setMessage('');
 
-    const response = await fetch('/api/enquiries', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
+    try {
+      const response = await fetch('/api/enquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
+      if (!response.ok) {
+        setStatus('error');
+        setMessage(data.message || 'Please correct the form and try again.');
+        return;
+      }
+
+      setStatus('success');
+      setMessage(data.message || 'Your enquiry has been received.');
+      form.reset();
+    } catch (error) {
+      console.error('Enquiry submission request failed:', error);
       setStatus('error');
-      setMessage(data.message || 'Please correct the form and try again.');
-      return;
+      setMessage('We could not submit your enquiry. Please try again or contact us by phone.');
     }
-
-    setStatus('success');
-    setMessage(data.message || 'Your enquiry was sent successfully.');
-    form.reset();
   }
 
   return (
@@ -74,13 +85,10 @@ export function EnquiryForm({ defaultService }: { defaultService?: string }) {
         </div>
         <div>
           <label htmlFor="service" className="mb-2 block text-sm font-medium text-walnut">Service required</label>
-          <select id="service" name="service" defaultValue={defaultService || defaultValues.service} className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm">
-            <option>Residential carpentry</option>
-            <option>Custom furniture</option>
-            <option>Doors and windows</option>
-            <option>Wardrobes and storage</option>
-            <option>Kitchen and interior woodwork</option>
-            <option>New construction woodwork</option>
+          <select id="service" name="service" defaultValue={selectedService} className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm">
+            {services.map((service) => (
+              <option key={service.slug} value={service.title}>{service.title}</option>
+            ))}
           </select>
         </div>
       </div>

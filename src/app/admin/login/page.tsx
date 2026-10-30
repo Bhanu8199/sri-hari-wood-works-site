@@ -8,6 +8,7 @@ export default function AdminLoginPage({ searchParams }: { searchParams?: { erro
         <div className="mb-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-olive">Admin access</p>
           <h1 className="mt-2 text-3xl font-semibold text-walnut">Sign in</h1>
+          <p className="mt-3 text-sm leading-6 text-slate-600">Admin credentials must be configured by the site owner in the server environment.</p>
         </div>
 
         {searchParams?.error ? (

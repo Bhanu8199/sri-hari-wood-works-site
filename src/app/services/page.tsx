@@ -2,27 +2,29 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ServiceCard } from '@/components/site/service-card';
 import { EnquiryForm } from '@/components/site/enquiry-form';
-import { businessProfile, featuredServices } from '@/lib/site-data';
+import { whatsappUrl } from '@/lib/site-data';
+import { getBusinessProfile, getPublishedServices } from '@/lib/business-settings';
 
 export const metadata: Metadata = {
-  title: 'Services',
-  description: 'Explore custom carpentry, furniture, wardrobes, doors, and residential woodworking services by Sri Hari Wood Works.'
+  title: 'Woodworking Services',
+  description: 'Explore wardrobes, cupboards, doors, windows, modular kitchens, cots, furniture, and customized wood works across Andhra Pradesh and Telangana.'
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const [business, services] = await Promise.all([getBusinessProfile(), getPublishedServices()]);
   return (
     <div className="container-shell py-16">
       <div className="mb-10 max-w-3xl">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-olive">Our services</p>
         <h1 className="mt-3 text-4xl font-semibold text-walnut md:text-5xl">Woodworking services built around your requirements.</h1>
         <p className="mt-4 text-lg leading-8 text-slate-700">
-          We provide custom carpentry and woodworking services for residential projects, interior spaces, and ongoing home improvements. Each service can be activated, edited, or removed from the admin dashboard.
+          Serving customers across {business.serviceArea}. Project feasibility and any travel charges will be discussed during the estimate process.
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        {featuredServices.map((service) => (
-          <ServiceCard key={service.slug} service={service} />
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((service) => (
+          <ServiceCard key={service.slug} service={service} whatsappPhone={business.whatsappPhone} />
         ))}
       </div>
 
@@ -35,11 +37,11 @@ export default function ServicesPage() {
               Service charges apply for estimates and travel depending on the project. We discuss your requirements directly before confirming the work.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="tel:+919948519979" className="btn-primary">Call now</a>
-              <a href="https://wa.me/919948519979" target="_blank" rel="noreferrer" className="btn-secondary">WhatsApp us</a>
+              <a href={`tel:${business.phone}`} className="btn-primary">Call now</a>
+              <a href={whatsappUrl(undefined, business.whatsappPhone)} target="_blank" rel="noreferrer" className="btn-secondary">WhatsApp us</a>
             </div>
           </div>
-          <EnquiryForm defaultService="Custom Woodwork" />
+          <EnquiryForm defaultService="customized-wood-works" services={services} />
         </div>
       </div>
     </div>

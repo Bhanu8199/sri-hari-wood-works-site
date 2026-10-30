@@ -1,90 +1,139 @@
-export const businessProfile = {
+import type { BusinessProfile, FAQ, Project, Service } from '@/types';
+
+export const businessProfile: BusinessProfile = {
   businessName: 'SRI HARI WOOD WORKS',
-  phone: '+919948519979',
-  whatsappPhone: '919948519979',
-  address: 'Somavarappadu, Andhra Pradesh 534450',
+  phone: '+919347978199',
+  secondaryPhone: '+919948519979',
+  whatsappPhone: '919347978199',
+  email: 'mbhanuvardhan630@gmail.com',
+  address: 'Somavarappadu, Eluru, Andhra Pradesh 534450',
   googleBusinessUrl: 'https://share.google/nuxOcu96HdkfuPgMk',
+  directionsUrl: 'https://maps.google.com/?q=Somavarappadu+Eluru+Andhra+Pradesh+534450',
+  serviceArea: 'Andhra Pradesh and Telangana',
+  ownerName: 'SRI HARI MEDAPALLI',
+  coOwnerName: 'BHANU VARDHAN MEDAPALLI',
   experienceYears: 37
 };
 
-export const featuredServices = [
-  {
-    slug: 'custom-furniture',
-    title: 'Custom furniture',
-    category: 'Custom woodworking',
-    shortDescription: 'Bespoke furniture tailored to the needs of your home and daily routine.',
-    description: 'We design and craft custom furniture that fits your space, usage patterns, and personal preferences.',
-    coverImage: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
-    isPublished: true
-  },
-  {
-    slug: 'doors-and-window-woodwork',
-    title: 'Doors and window woodwork',
-    category: 'Interior woodwork',
-    shortDescription: 'Functional and durable door and window detailing for residential spaces.',
-    description: 'This service includes custom fitting, refinishing, and practical woodwork for door frames, shutters, and windows.',
-    coverImage: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80',
-    isPublished: true
-  },
-  {
-    slug: 'wardrobes-and-storage',
-    title: 'Wardrobes and storage',
-    category: 'Storage solutions',
-    shortDescription: 'Smart storage options designed for Indian homes and everyday convenience.',
-    description: 'We plan, build, and fit wardrobes and storage systems around your room dimensions and usage patterns.',
-    coverImage: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
-    isPublished: true
-  }
+export const businessHours = [
+  { day: 'Monday', hours: '9:30 AM – 6:30 PM' },
+  { day: 'Tuesday', hours: '9:30 AM – 6:30 PM' },
+  { day: 'Wednesday', hours: '9:30 AM – 6:30 PM' },
+  { day: 'Thursday', hours: '9:30 AM – 6:30 PM' },
+  { day: 'Friday', hours: '9:30 AM – 6:30 PM' },
+  { day: 'Saturday', hours: '9:30 AM – 6:30 PM' },
+  { day: 'Sunday', hours: 'Closed' }
 ];
 
-export const featuredProjects = [
+export const featuredServices: Service[] = [
   {
-    slug: 'wardrobe-renovation',
-    title: 'Wardrobe renovation',
+    slug: 'wardrobes-cupboards',
+    title: 'WARDROBES & CUPBOARDS',
     category: 'Storage',
-    description: 'Custom wardrobe design for a compact residential bedroom using practical storage planning.',
-    coverImage: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
-    completedAt: '2026'
+    shortDescription: 'Custom-designed wardrobes and cupboards tailored to your space, storage needs, and preferred finish.',
+    description: 'Custom-designed wardrobes and cupboards tailored to your space, storage needs, and preferred finish.',
+    coverImage: '/images/wardrobes-cupboards.png',
+    imageAlt: 'Warm wooden built-in wardrobes and custom media cabinetry in a contemporary living room.',
+    imageCredit: 'Photo supplied by SRI HARI WOOD WORKS',
+    imageSourceUrl: '',
+    imageLicenseUrl: '',
+    imageLicenseLabel: 'Business photo',
+    isPublished: true
   },
   {
-    slug: 'kitchen-woodwork',
-    title: 'Kitchen woodwork',
-    category: 'Interior',
-    description: 'Kitchen unit design and fit-out focused on organized storage and durable finishes.',
-    coverImage: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
-    completedAt: '2025'
+    slug: 'doors-windows',
+    title: 'DOORS & WINDOWS',
+    category: 'Doors and windows',
+    shortDescription: 'Wooden doors and window woodwork designed to suit your home and project requirements.',
+    description: 'Wooden doors and window woodwork designed to suit your home and project requirements.',
+    coverImage: '/images/doors-windows.png',
+    imageAlt: 'Ornately carved wooden door with decorative floral panels.',
+    imageCredit: 'Photo supplied by SRI HARI WOOD WORKS',
+    imageSourceUrl: '',
+    imageLicenseUrl: '',
+    imageLicenseLabel: 'Business photo',
+    isPublished: true
   },
   {
-    slug: 'front-door-fit',
-    title: 'Front door fit',
-    category: 'Doors',
-    description: 'Residential door installation with a strong, durable finish and practical craftsmanship.',
-    coverImage: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80',
-    completedAt: '2026'
+    slug: 'modular-kitchens',
+    title: 'MODULAR KITCHENS',
+    category: 'Kitchens',
+    shortDescription: 'Kitchen woodwork planned around your available space, storage needs, and preferred design.',
+    description: 'Kitchen woodwork planned around your available space, storage needs, and preferred design.',
+    coverImage: '/images/modular-kitchens.png',
+    imageAlt: 'Corner modular kitchen with blue and white cabinets, dark countertop, sink, and cooktop.',
+    imageCredit: 'Photo supplied by SRI HARI WOOD WORKS',
+    imageSourceUrl: '',
+    imageLicenseUrl: '',
+    imageLicenseLabel: 'Business photo',
+    isPublished: true
+  },
+  {
+    slug: 'cots-furniture',
+    title: 'COTS & FURNITURE',
+    category: 'Furniture',
+    shortDescription: 'Custom wooden cots and furniture created to match your preferred size, design, and requirements.',
+    description: 'Custom wooden cots and furniture created to match your preferred size, design, and requirements.',
+    coverImage: '/images/cots-furniture.png',
+    imageAlt: 'Ornately carved wooden cot with a polished finish and decorative headboard.',
+    imageCredit: 'Photo supplied by SRI HARI WOOD WORKS',
+    imageSourceUrl: '',
+    imageLicenseUrl: '',
+    imageLicenseLabel: 'Business photo',
+    isPublished: true
+  },
+  {
+    slug: 'customized-wood-works',
+    title: 'CUSTOMIZED WOOD WORKS',
+    category: 'Custom woodwork',
+    shortDescription: 'Personalized woodworking solutions designed around your ideas, measurements, and project needs.',
+    description: 'Personalized woodworking solutions designed around your ideas, measurements, and project needs.',
+    coverImage: '/images/customized-wood-works.png',
+    imageAlt: 'Handcrafted dark wood chair with a carved backrest and curved arms.',
+    imageCredit: 'Photo supplied by SRI HARI WOOD WORKS',
+    imageSourceUrl: '',
+    imageLicenseUrl: '',
+    imageLicenseLabel: 'Business photo',
+    isPublished: true
   }
 ];
 
-export const faqs = [
+export const featuredProjects: Project[] = [];
+
+export const faqs: FAQ[] = [
   {
-    question: 'Do you build custom furniture?',
-    answer: 'Yes, custom furniture and woodwork are offered depending on project scope, material requirements, and site conditions. We discuss requirements directly before proceeding.'
+    question: 'What woodworking services do you offer?',
+    answer: 'We offer wardrobes and cupboards, doors and windows, modular kitchens, cots and furniture, and customized wood works. The project scope is discussed before an estimate.'
   },
   {
-    question: 'How are estimates handled?',
-    answer: 'Service charges apply for estimates and travel, and the applicable charges are explained before work is confirmed. We prefer clear communication before starting a project.'
+    question: 'How are estimates and travel handled?',
+    answer: 'Project feasibility, estimate arrangements, and any travel charges are discussed with you based on your project location before work is confirmed.'
   },
   {
     question: 'Do you provide site visits?',
-    answer: 'Site visits may be required to review dimensions, material suitability, and practical execution for the project. Travel charges may apply depending on the location.'
+    answer: 'A site visit may be needed to review measurements, materials, and project requirements. Availability and any travel charges are discussed during the estimate process.'
   },
   {
     question: 'What areas do you serve?',
-    answer: 'The business serves Somavarappadu and nearby residential areas, subject to confirmation of service coverage and travel arrangements.'
+    answer: 'Serving customers across Andhra Pradesh and Telangana. Project feasibility and any travel charges are discussed during the estimate process.'
   },
   {
-    question: 'How long does a project usually take?',
-    answer: 'Project timelines depend on the scale, material selection, and work scope. We discuss timelines during the requirement discussion and estimate stage.'
+    question: 'What are your business hours?',
+    answer: 'Monday through Saturday, 9:30 AM to 6:30 PM. We are closed on Sundays and applicable festival holidays.'
   }
 ];
 
 export const reviews = [];
+
+export const whatsappUrl = (message?: string, phone = businessProfile.whatsappPhone) =>
+  `https://wa.me/${phone}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
+
+export function formatPhoneNumber(phone: string) {
+  const digits = phone.replace(/\D/g, '');
+  const isIndianNumber = digits.length === 12 && digits.startsWith('91');
+  const localNumber = isIndianNumber ? digits.slice(2) : digits;
+  if (localNumber.length !== 10) {
+    return phone;
+  }
+  return `${isIndianNumber ? '+91 ' : ''}${localNumber.slice(0, 5)} ${localNumber.slice(5)}`;
+}

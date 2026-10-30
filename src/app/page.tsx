@@ -1,24 +1,41 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { HeroSection } from '@/components/site/hero-section';
 import { ServiceCard } from '@/components/site/service-card';
-import { ProjectCard } from '@/components/site/project-card';
+import { ServiceImageGallery } from '@/components/site/service-image-gallery';
 import { ReviewSection } from '@/components/site/review-section';
 import { ContactCTA } from '@/components/site/contact-cta';
 import { ExperienceBadge } from '@/components/site/experience-badge';
 import { FAQAccordion } from '@/components/site/faq-accordion';
-import { businessProfile, featuredServices, featuredProjects, faqs } from '@/lib/site-data';
+import { ArrowUpRight, Hammer, LayoutGrid, MapPinned } from 'lucide-react';
+import { featuredServices, faqs } from '@/lib/site-data';
+import { getBusinessProfile, getPublishedServices } from '@/lib/business-settings';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [business, services] = await Promise.all([getBusinessProfile(), getPublishedServices()]);
   return (
     <>
-      <HeroSection />
+      <HeroSection serviceArea={business.serviceArea} baseLocation={business.address.split(',').slice(0, 2).join(',').trim()} />
 
-      <section className="container-shell py-12">
+      <section className="container-shell pb-8 pt-2 md:pb-12">
         <div className="grid gap-4 md:grid-cols-3">
-          {['37 years of experience', 'Custom woodworking', 'Local service in Somavarappadu'].map((item) => (
-            <ExperienceBadge key={item} label={item} />
-          ))}
+          <ExperienceBadge
+            value={`${business.experienceYears}+`}
+            label="Years of Experience"
+            detail="Of trusted craftsmanship"
+            icon={<Hammer className="h-6 w-6" />}
+          />
+          <ExperienceBadge
+            value={String(services.length)}
+            label="Core Specialties"
+            detail="Kitchens, wardrobes, doors & more"
+            icon={<LayoutGrid className="h-6 w-6" />}
+          />
+          <ExperienceBadge
+            value="2 States"
+            label="AP & Telangana Coverage"
+            detail="Project feasibility discussed by location"
+            icon={<MapPinned className="h-6 w-6" />}
+          />
         </div>
       </section>
 
@@ -31,9 +48,9 @@ export default function HomePage() {
           <Link href="/services" className="text-sm font-medium text-walnut underline underline-offset-4">View all services</Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {featuredServices.map((service) => (
-            <ServiceCard key={service.slug} service={service} />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
+            <ServiceCard key={service.slug} service={service} whatsappPhone={business.whatsappPhone} />
           ))}
         </div>
       </section>
@@ -42,17 +59,13 @@ export default function HomePage() {
         <div className="container-shell">
           <div className="flex items-end justify-between gap-4 pb-8">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-olive">Featured work</p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-walnut md:text-4xl">Recent projects</h2>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-olive">Our work</p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-walnut md:text-4xl">Explore our specialties</h2>
             </div>
-            <Link href="/projects" className="text-sm font-medium text-walnut underline underline-offset-4">Explore all projects</Link>
+            <Link href="/projects" className="text-sm font-medium text-walnut underline underline-offset-4">Explore all our work</Link>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
+          <ServiceImageGallery services={featuredServices} />
         </div>
       </section>
 
@@ -103,26 +116,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      <ContactCTA business={businessProfile} />
+      <ContactCTA business={business} />
 
-      <section className="container-shell py-10">
-        <div className="overflow-hidden rounded-3xl border border-border bg-white shadow-soft">
-          <div className="grid gap-0 md:grid-cols-2">
-            <div className="relative h-72 md:h-full">
-              <Image
-                src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
-                alt="Placeholder craftsmanship photography"
-                fill
-                className="object-cover"
-              />
+      <section className="container-shell pb-16">
+        <div className="rounded-3xl border border-border bg-white p-8 shadow-soft">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-olive">Shop address</p>
+            <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2">
+              <h2 className="text-2xl font-semibold text-walnut">{business.address}</h2>
+              <span aria-hidden="true" className="text-walnut">-</span>
+              <a href={business.directionsUrl} target="_blank" rel="noreferrer" className="btn-primary shrink-0">
+                Get directions <ArrowUpRight className="ml-1 inline h-4 w-4" aria-hidden="true" />
+              </a>
             </div>
-            <div className="p-8 md:p-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-olive">Trusted service</p>
-              <h3 className="mt-3 text-2xl font-semibold text-walnut md:text-3xl">Professional woodworking with clear communication.</h3>
-              <p className="mt-4 text-base leading-7 text-slate-700">
-                Images and project details should be replaced with owner-approved gallery content before launch. Until then, this layout is designed to be ready for real work and easy to update through the admin dashboard.
-              </p>
-            </div>
+            <p className="mt-3 max-w-3xl leading-7 text-slate-700">Serving customers across {business.serviceArea}. Project feasibility and any travel charges will be discussed during the estimate process.</p>
           </div>
         </div>
       </section>

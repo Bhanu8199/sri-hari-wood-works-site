@@ -1,4 +1,5 @@
 import { ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 export function ReviewSection({ reviews }: { reviews: Array<{ author: string; review: string; source: string }> }) {
   return (
@@ -23,9 +24,9 @@ export function ReviewSection({ reviews }: { reviews: Array<{ author: string; re
         ) : (
           <div className="rounded-3xl border border-dashed border-border bg-white p-8 text-center shadow-soft">
             <p className="text-base text-slate-700">No review text has been published yet. Use the business’s Google listing for additional verified customer feedback.</p>
-            <a href="https://share.google/nuxOcu96HdkfuPgMk" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-walnut">
-              View Google Business Profile <ExternalLink className="h-4 w-4" />
-            </a>
+            <Link href="/reviews" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-walnut">
+              Read customer reviews <ExternalLink className="h-4 w-4" />
+            </Link>
           </div>
         )}
       </div>

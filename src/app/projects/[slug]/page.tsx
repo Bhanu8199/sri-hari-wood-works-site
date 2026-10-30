@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { featuredProjects } from '@/lib/site-data';
+import { featuredProjects, whatsappUrl } from '@/lib/site-data';
+import { getBusinessProfile } from '@/lib/business-settings';
 
 export async function generateStaticParams() {
   return featuredProjects.map((project) => ({ slug: project.slug }));
@@ -21,7 +22,8 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
+export default async function ProjectDetailPage({ params }: { params: { slug: string } }) {
+  const business = await getBusinessProfile();
   const project = featuredProjects.find((item) => item.slug === params.slug);
 
   if (!project) {
@@ -37,7 +39,13 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
       <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <div className="relative h-[420px] overflow-hidden rounded-3xl border border-border bg-white shadow-soft">
-            <Image src={project.coverImage} alt={project.title} fill className="object-cover" />
+            {project.coverImage ? (
+              <Image src={project.coverImage} alt={project.title} fill className="object-cover" />
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center gap-3 bg-cream text-walnut">
+                <span>Owner-approved project photo coming soon</span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -47,8 +55,8 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
           <p className="text-base leading-7 text-slate-700">{project.description}</p>
           {project.completedAt ? <p className="text-sm text-slate-600">Completed: {project.completedAt}</p> : null}
           <div className="flex flex-wrap gap-3">
-            <a href="tel:+919948519979" className="btn-primary">Ask about a similar project</a>
-            <a href="https://wa.me/919948519979" target="_blank" rel="noreferrer" className="btn-secondary">WhatsApp us</a>
+            <a href={`tel:${business.phone}`} className="btn-primary">Ask about a similar project</a>
+            <a href={whatsappUrl(`Hello Sri Hari Wood Works, I would like to enquire about ${project.title}. Please contact me to discuss my requirements.`, business.whatsappPhone)} target="_blank" rel="noreferrer" className="btn-secondary">WhatsApp us</a>
           </div>
         </div>
       </div>

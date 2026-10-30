@@ -4,10 +4,16 @@ import { redirect } from 'next/navigation';
 export async function loginAction(formData: FormData) {
   const username = String(formData.get('username') || '').trim();
   const password = String(formData.get('password') || '').trim();
-  const expectedUsername = process.env.ADMIN_USERNAME || 'admin';
-  const expectedPassword = process.env.ADMIN_PASSWORD || 'change-me';
+  const expectedUsername = process.env.ADMIN_USERNAME;
+  const expectedPassword = process.env.ADMIN_PASSWORD;
 
-  if (username !== expectedUsername || password !== expectedPassword) {
+  if (
+    !expectedUsername ||
+    !expectedPassword ||
+    expectedPassword === 'change-me' ||
+    username !== expectedUsername ||
+    password !== expectedPassword
+  ) {
     redirect('/admin/login?error=Invalid credentials');
   }
 
