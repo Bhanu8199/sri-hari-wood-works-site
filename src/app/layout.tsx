@@ -7,6 +7,11 @@ import { getBusinessHourConfig, getBusinessProfile, getPublishedServices } from 
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg'
+  },
   title: {
     default: 'SRI HARI WOOD WORKS | Custom Carpentry in Andhra Pradesh & Telangana',
     template: '%s | Sri Hari Wood Works'
@@ -34,6 +39,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     telephone: business.phone,
     email: business.email,
     url: process.env.NEXT_PUBLIC_SITE_URL,
+    logo: new URL('/icon.svg', process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').toString(),
     address: {
       '@type': 'PostalAddress',
       streetAddress: business.address,
