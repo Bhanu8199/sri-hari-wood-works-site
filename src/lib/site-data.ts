@@ -8,7 +8,7 @@ export const businessProfile: BusinessProfile = {
   email: 'mbhanuvardhan630@gmail.com',
   address: 'Somavarappadu, Eluru, Andhra Pradesh 534450',
   googleBusinessUrl: 'https://share.google/nuxOcu96HdkfuPgMk',
-  directionsUrl: 'https://maps.google.com/?q=Somavarappadu+Eluru+Andhra+Pradesh+534450',
+  directionsUrl: 'https://www.google.com/maps/place/SRI+HARI+WOOD+WORKS/@16.75036,81.1116351,17z/data=!3m1!4b1!4m6!3m5!1s0x3a366bb71e153ef3:0xd3496e0b2fd37b8c!8m2!3d16.75036!4d81.11421!16s%2Fg%2F11s84khd_3?entry=ttu&g_ep=EgoyMDI2MTAyNy4wIKXMDSoASAFQAw%3D%3D',
   serviceArea: 'Andhra Pradesh and Telangana',
   ownerName: 'SRI HARI MEDAPALLI',
   coOwnerName: 'BHANU VARDHAN MEDAPALLI',
