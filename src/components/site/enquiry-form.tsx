@@ -9,8 +9,8 @@ const defaultValues = {
   phone: '',
   email: '',
   service: featuredServices[0].title,
-  projectLocation: '',
-  projectDescription: '',
+  city: '',
+  notes: '',
   preferredContactMethod: 'Phone',
   consent: true
 };
@@ -31,8 +31,8 @@ export function EnquiryForm({ defaultService, services = featuredServices }: { d
       phone: String(formData.get('phone') || ''),
       email: String(formData.get('email') || ''),
       service: String(formData.get('service') || selectedService),
-      projectLocation: String(formData.get('projectLocation') || ''),
-      projectDescription: String(formData.get('projectDescription') || ''),
+      city: String(formData.get('city') || ''),
+      notes: String(formData.get('notes') || ''),
       preferredContactMethod: String(formData.get('preferredContactMethod') || 'Phone'),
       consent: formData.get('consent') === 'on'
     };
@@ -85,7 +85,7 @@ export function EnquiryForm({ defaultService, services = featuredServices }: { d
         </div>
         <div>
           <label htmlFor="service" className="mb-2 block text-sm font-medium text-walnut">Service required</label>
-          <select id="service" name="service" defaultValue={selectedService} className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm">
+          <select id="service" name="service" defaultValue={selectedService} required className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm">
             {services.map((service) => (
               <option key={service.slug} value={service.title}>{service.title}</option>
             ))}
@@ -94,13 +94,13 @@ export function EnquiryForm({ defaultService, services = featuredServices }: { d
       </div>
 
       <div>
-        <label htmlFor="projectLocation" className="mb-2 block text-sm font-medium text-walnut">Project location</label>
-        <input id="projectLocation" name="projectLocation" defaultValue={defaultValues.projectLocation} required className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm" />
+        <label htmlFor="city" className="mb-2 block text-sm font-medium text-walnut">Location / city</label>
+        <input id="city" name="city" defaultValue={defaultValues.city} required minLength={2} maxLength={200} className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm" />
       </div>
 
       <div>
-        <label htmlFor="projectDescription" className="mb-2 block text-sm font-medium text-walnut">Project description</label>
-        <textarea id="projectDescription" name="projectDescription" defaultValue={defaultValues.projectDescription} required rows={4} className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm" />
+        <label htmlFor="notes" className="mb-2 block text-sm font-medium text-walnut">Project details / notes</label>
+        <textarea id="notes" name="notes" defaultValue={defaultValues.notes} required minLength={10} maxLength={2000} rows={4} className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm" />
       </div>
 
       <div>
@@ -118,13 +118,13 @@ export function EnquiryForm({ defaultService, services = featuredServices }: { d
       </label>
 
       {status !== 'idle' ? (
-        <div className={status === 'success' ? 'rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700' : 'rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700'}>
+        <div role={status === 'error' ? 'alert' : 'status'} aria-live="polite" className={status === 'success' ? 'rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700' : status === 'error' ? 'rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700' : 'rounded-xl border border-border bg-stone px-4 py-3 text-sm text-walnut'}>
           {message}
         </div>
       ) : null}
 
       <button type="submit" disabled={status === 'loading'} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60">
-        {status === 'loading' ? 'Submitting...' : 'Request an Estimate'}
+        {status === 'loading' ? 'Sending request...' : 'Request an Estimate'}
       </button>
     </form>
   );

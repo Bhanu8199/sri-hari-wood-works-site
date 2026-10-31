@@ -10,6 +10,7 @@ type Enquiry = {
   preferred_contact_method: string | null;
   status: string;
   notification_status: string;
+  whatsapp_notification_status: string;
   created_at: string;
   service_title: string | null;
 };
@@ -26,7 +27,8 @@ export default async function AdminEnquiriesPage() {
       const { rows } = await database.query<Enquiry>(
         `SELECT e.id, e.customer_name, e.phone, e.email, e.project_location,
           e.project_description, e.preferred_contact_method, e.status,
-          e.notification_status, e.created_at, s.title AS service_title
+          e.notification_status, e.whatsapp_notification_status, e.created_at,
+          s.title AS service_title
         FROM enquiries e
         LEFT JOIN services s ON s.id = e.service_id
         ORDER BY e.created_at DESC`
@@ -51,7 +53,7 @@ export default async function AdminEnquiriesPage() {
           <table className="min-w-full text-left">
             <thead className="bg-stone">
               <tr>
-                {['Customer', 'Service', 'Location', 'Project description', 'Contact', 'Status', 'Email notice', 'Date'].map((heading) => (
+                {['Customer', 'Service', 'Location', 'Project description', 'Contact', 'Status', 'Email notice', 'WhatsApp alert', 'Date'].map((heading) => (
                   <th key={heading} className="px-4 py-3 text-sm font-semibold text-walnut">{heading}</th>
                 ))}
               </tr>
@@ -70,6 +72,7 @@ export default async function AdminEnquiriesPage() {
                   <td className="px-4 py-4 text-slate-700">{enquiry.preferred_contact_method || 'Not specified'}</td>
                   <td className="px-4 py-4 text-slate-700">{enquiry.status}</td>
                   <td className="px-4 py-4 text-slate-700">{enquiry.notification_status.replaceAll('_', ' ')}</td>
+                  <td className="px-4 py-4 text-slate-700">{enquiry.whatsapp_notification_status.replaceAll('_', ' ')}</td>
                   <td className="px-4 py-4 text-slate-700">
                     {new Intl.DateTimeFormat('en-IN', { dateStyle: 'medium', timeZone: 'Asia/Kolkata' }).format(new Date(enquiry.created_at))}
                   </td>

@@ -86,6 +86,8 @@ CREATE TABLE IF NOT EXISTS enquiries (
   consent_at TIMESTAMPTZ,
   notification_status TEXT NOT NULL DEFAULT 'not_configured'
     CHECK (notification_status IN ('pending', 'sent', 'failed', 'not_configured')),
+  whatsapp_notification_status TEXT NOT NULL DEFAULT 'not_configured'
+    CHECK (whatsapp_notification_status IN ('pending', 'sent', 'failed', 'not_configured')),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
