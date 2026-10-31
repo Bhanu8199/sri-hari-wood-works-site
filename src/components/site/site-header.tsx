@@ -1,9 +1,20 @@
+'use client';
+
 import Link from 'next/link';
+import { useRef } from 'react';
 import { Menu, MessageCircleMore } from 'lucide-react';
 import { formatPhoneNumber, whatsappUrl } from '@/lib/site-data';
 import type { BusinessProfile } from '@/types';
 
 export function SiteHeader({ business }: { business: BusinessProfile }) {
+  const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+
+  function closeMobileMenu() {
+    if (mobileMenuRef.current) {
+      mobileMenuRef.current.open = false;
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 border-b border-[#eadcc5] bg-[#fffdf9]/90 backdrop-blur-sm">
       <div className="container-shell flex items-center justify-between py-4">
@@ -39,7 +50,7 @@ export function SiteHeader({ business }: { business: BusinessProfile }) {
           </a>
         </div>
 
-        <details className="relative lg:hidden">
+        <details ref={mobileMenuRef} className="relative lg:hidden">
           <summary className="flex h-11 w-11 list-none cursor-pointer items-center justify-center rounded-full border border-border bg-white text-walnut" aria-label="Open menu">
             <Menu className="h-5 w-5" />
           </summary>
@@ -52,12 +63,12 @@ export function SiteHeader({ business }: { business: BusinessProfile }) {
               ['Contact', '/contact'],
               ['FAQ', '/faq']
             ].map(([label, href]) => (
-              <Link key={href} href={href} className="block text-sm font-medium text-walnut">{label}</Link>
+              <Link key={href} href={href} onClick={closeMobileMenu} className="block text-sm font-medium text-walnut">{label}</Link>
             ))}
-            <a href={`tel:${business.phone}`} className="block text-sm font-semibold text-walnut">Call {formatPhoneNumber(business.phone)}</a>
-            <a href={`tel:${business.secondaryPhone}`} className="block text-sm font-semibold text-walnut">Call {formatPhoneNumber(business.secondaryPhone)}</a>
-            <Link href="/contact" className="block text-sm font-semibold text-walnut">Request an Estimate</Link>
-            <a href={whatsappUrl(undefined, business.whatsappPhone)} target="_blank" rel="noreferrer" className="block text-sm font-semibold text-[#167a39]">WhatsApp</a>
+            <a href={`tel:${business.phone}`} onClick={closeMobileMenu} className="block text-sm font-semibold text-walnut">Call {formatPhoneNumber(business.phone)}</a>
+            <a href={`tel:${business.secondaryPhone}`} onClick={closeMobileMenu} className="block text-sm font-semibold text-walnut">Call {formatPhoneNumber(business.secondaryPhone)}</a>
+            <Link href="/contact" onClick={closeMobileMenu} className="block text-sm font-semibold text-walnut">Request an Estimate</Link>
+            <a href={whatsappUrl(undefined, business.whatsappPhone)} onClick={closeMobileMenu} target="_blank" rel="noreferrer" className="block text-sm font-semibold text-[#167a39]">WhatsApp</a>
           </nav>
         </details>
       </div>

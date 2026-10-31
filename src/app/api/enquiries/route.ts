@@ -5,9 +5,9 @@ import { getDatabase } from '@/lib/database';
 export const runtime = 'nodejs';
 
 const enquirySchema = z.object({
-  name: z.string().trim().min(2).max(80),
-  phone: z.string().trim().min(8).max(20),
-  email: z.string().trim().email().max(254).optional().or(z.literal('')),
+  name: z.string().trim().min(2).max(30),
+  phone: z.string().trim().regex(/^\d{10}$/),
+  email: z.string().trim().email().max(254),
   service: z.string().trim().min(2).max(120),
   city: z.string().trim().min(2).max(200).optional(),
   notes: z.string().trim().min(10).max(2000).optional(),

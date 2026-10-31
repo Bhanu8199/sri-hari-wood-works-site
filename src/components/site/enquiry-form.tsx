@@ -11,8 +11,7 @@ const defaultValues = {
   service: featuredServices[0].title,
   city: '',
   notes: '',
-  preferredContactMethod: 'Phone',
-  consent: true
+  preferredContactMethod: ''
 };
 
 export function EnquiryForm({ defaultService, services = featuredServices }: { defaultService?: string; services?: Service[] }) {
@@ -70,18 +69,18 @@ export function EnquiryForm({ defaultService, services = featuredServices }: { d
       <div className="grid gap-4 md:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-2 block text-sm font-medium text-walnut">Full name</label>
-          <input id="name" name="name" defaultValue={defaultValues.name} required className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm" />
+          <input id="name" name="name" defaultValue={defaultValues.name} required minLength={2} maxLength={30} className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm" />
         </div>
         <div>
           <label htmlFor="phone" className="mb-2 block text-sm font-medium text-walnut">Phone number</label>
-          <input id="phone" name="phone" defaultValue={defaultValues.phone} required className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm" />
+          <input id="phone" name="phone" type="tel" inputMode="numeric" pattern="[0-9]{10}" minLength={10} maxLength={10} title="Enter a 10-digit phone number." defaultValue={defaultValues.phone} required className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm" />
         </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <label htmlFor="email" className="mb-2 block text-sm font-medium text-walnut">Email (optional)</label>
-          <input id="email" name="email" type="email" defaultValue={defaultValues.email} className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm" />
+          <label htmlFor="email" className="mb-2 block text-sm font-medium text-walnut">Email</label>
+          <input id="email" name="email" type="email" maxLength={254} defaultValue={defaultValues.email} required className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm" />
         </div>
         <div>
           <label htmlFor="service" className="mb-2 block text-sm font-medium text-walnut">Service required</label>
@@ -105,7 +104,8 @@ export function EnquiryForm({ defaultService, services = featuredServices }: { d
 
       <div>
         <label htmlFor="preferredContactMethod" className="mb-2 block text-sm font-medium text-walnut">Preferred contact method</label>
-        <select id="preferredContactMethod" name="preferredContactMethod" defaultValue={defaultValues.preferredContactMethod} className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm">
+        <select id="preferredContactMethod" name="preferredContactMethod" defaultValue={defaultValues.preferredContactMethod} required className="w-full rounded-xl border border-border bg-cream px-3 py-2.5 text-sm">
+          <option value="" disabled>Select a contact method</option>
           <option>Phone</option>
           <option>WhatsApp</option>
           <option>Email</option>
@@ -113,7 +113,7 @@ export function EnquiryForm({ defaultService, services = featuredServices }: { d
       </div>
 
       <label className="flex items-start gap-3 text-sm text-slate-700">
-        <input type="checkbox" name="consent" defaultChecked className="mt-1 h-4 w-4" />
+        <input type="checkbox" name="consent" required className="mt-1 h-4 w-4" />
         <span>I consent to being contacted about my enquiry.</span>
       </label>
 
