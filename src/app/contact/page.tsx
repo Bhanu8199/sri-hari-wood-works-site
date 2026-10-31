@@ -29,10 +29,16 @@ export default async function ContactPage() {
             </div>
             <div className="mt-5 space-y-4">
               <div>
-                <a href={`tel:${business.phone}`} className="btn-primary inline-flex">Call now</a>
+                <a href={`tel:${business.phone}`} className="btn-primary inline-flex items-center gap-2">
+                  <PhoneCall className="h-4 w-4" aria-hidden="true" />
+                  Call now
+                </a>
               </div>
               <div>
-                <a href={`tel:${business.secondaryPhone}`} className="btn-primary inline-flex">Call second number</a>
+                <a href={`tel:${business.secondaryPhone}`} className="btn-primary inline-flex items-center gap-2">
+                  <PhoneCall className="h-4 w-4" aria-hidden="true" />
+                  Call second number
+                </a>
               </div>
             </div>
           </article>
@@ -64,7 +70,13 @@ export default async function ContactPage() {
               <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-olive">Email</h2>
             </div>
             <p className="mt-5 text-sm leading-6 text-slate-600">Send us a message about your project.</p>
-            <a href={`mailto:${business.email}`} className="mt-3 inline-block break-all text-lg font-semibold text-walnut underline decoration-[#d6b77c] underline-offset-4 hover:text-olive">{business.email}</a>
+            <a
+              href={`mailto:${business.email}`}
+              className="btn-primary mt-4 inline-flex items-center gap-2"
+            >
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              Email us
+            </a>
           </article>
         </div>
 
