@@ -6,7 +6,7 @@ A responsive business website built with Next.js, TypeScript, Tailwind CSS, and 
 
 - Public home, services, work gallery, about, contact, reviews, FAQ, and privacy pages
 - Phone, WhatsApp, and estimate enquiry actions
-- Server-validated estimate form with Neon PostgreSQL persistence
+- Direct phone and WhatsApp contact links for estimate enquiries
 - Protected admin pages for enquiries and business settings
 - Business profile, weekly hours, holidays, and service descriptions managed in Neon
 - SEO metadata, sitemap, robots rules, and structured business data
@@ -33,7 +33,7 @@ Without `DATABASE_URL`, public pages use built-in default business data. Forms a
 
 - `neon/migrations/001_initial_schema.sql` creates the business profile, business hours, services, projects, project images, enquiries, holidays, FAQs, and admin profile tables.
 - `neon/seed.sql` inserts the initial business details, five services, hours, and FAQs. Run it once on a new database; it updates the initial profile/service records on rerun.
-- Estimate requests are stored in Neon with their submission timestamp. No notification service is called when a form is submitted.
+- The public site currently directs estimate enquiries to phone and WhatsApp instead of collecting them in a web form. Existing enquiry records remain available in Neon and the admin area.
 - View submissions in Neon Console → **Tables** → `enquiries`, or sign in and open `/admin/enquiries`.
 
 ## Existing data migration

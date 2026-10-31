@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { ServiceCard } from '@/components/site/service-card';
-import { EnquiryForm } from '@/components/site/enquiry-form';
 import { whatsappUrl } from '@/lib/site-data';
 import { getBusinessProfile, getPublishedServices } from '@/lib/business-settings';
 
@@ -29,7 +27,7 @@ export default async function ServicesPage() {
       </div>
 
       <div className="mt-16 rounded-3xl border border-border bg-white p-8 shadow-soft">
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div className="max-w-3xl">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-olive">Need a custom service?</p>
             <h2 className="mt-2 text-3xl font-semibold text-walnut">Tell us what you need.</h2>
@@ -41,7 +39,6 @@ export default async function ServicesPage() {
               <a href={whatsappUrl(undefined, business.whatsappPhone)} target="_blank" rel="noreferrer" className="btn-secondary">WhatsApp us</a>
             </div>
           </div>
-          <EnquiryForm defaultService="customized-wood-works" services={services} />
         </div>
       </div>
     </div>

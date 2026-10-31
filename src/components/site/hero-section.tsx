@@ -13,10 +13,8 @@ export function HeroSection({ serviceArea, baseLocation }: { serviceArea: string
         <h1 className="mt-5 max-w-[700px] text-[2.5rem] font-semibold tracking-tight text-walnut">End-to-End Custom Woodwork, Perfected Over 37 Years of Mastery.</h1>
         <p className="mt-5 max-w-xl text-lg leading-[1.6] text-slate-700">Complete residential woodwork solutions—custom wardrobes, ergonomic modular kitchens, and handcrafted furniture tailored precisely to your floor plan and finish preferences.</p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <Link href="/contact" className="btn-primary">Request an Estimate</Link>
           <Link href="/projects" className="btn-secondary inline-flex items-center gap-2">Explore Our Work <ArrowUpRight className="h-4 w-4" /></Link>
         </div>
-        <p className="mt-5 text-sm font-medium text-slate-700">37 years of hands-on woodworking experience.</p>
       </div>
 
       <div className="relative min-h-[360px] overflow-hidden rounded-[32px] border border-[#d8c39d] bg-[#f5ecdc] shadow-soft md:min-h-[480px]">

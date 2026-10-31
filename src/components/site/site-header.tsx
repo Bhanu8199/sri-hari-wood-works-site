@@ -39,7 +39,6 @@ export function SiteHeader({ business }: { business: BusinessProfile }) {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <Link href="/contact" className="btn-primary">Request an Estimate</Link>
           <a
             href={whatsappUrl(undefined, business.whatsappPhone)}
             target="_blank"
@@ -67,7 +66,6 @@ export function SiteHeader({ business }: { business: BusinessProfile }) {
             ))}
             <a href={`tel:${business.phone}`} onClick={closeMobileMenu} className="block text-sm font-semibold text-walnut">Call {formatPhoneNumber(business.phone)}</a>
             <a href={`tel:${business.secondaryPhone}`} onClick={closeMobileMenu} className="block text-sm font-semibold text-walnut">Call {formatPhoneNumber(business.secondaryPhone)}</a>
-            <Link href="/contact" onClick={closeMobileMenu} className="block text-sm font-semibold text-walnut">Request an Estimate</Link>
             <a href={whatsappUrl(undefined, business.whatsappPhone)} onClick={closeMobileMenu} target="_blank" rel="noreferrer" className="block text-sm font-semibold text-[#167a39]">WhatsApp</a>
           </nav>
         </details>
