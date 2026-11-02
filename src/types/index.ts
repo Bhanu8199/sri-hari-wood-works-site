@@ -19,6 +19,8 @@ export type Project = {
   category: string;
   description: string;
   coverImage: string | null;
+  coverImageWidth?: number;
+  coverImageHeight?: number;
   completedAt?: string;
 };
 

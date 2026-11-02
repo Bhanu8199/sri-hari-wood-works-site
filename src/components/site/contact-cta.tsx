@@ -1,5 +1,6 @@
-import { MessageCircleMore, PhoneCall } from 'lucide-react';
+import { PhoneCall } from 'lucide-react';
 import { whatsappUrl } from '@/lib/site-data';
+import { WhatsAppIcon } from '@/components/site/whatsapp-icon';
 
 export function ContactCTA({ business }: { business: { phone: string; secondaryPhone: string; whatsappPhone: string } }) {
   return (
@@ -13,7 +14,7 @@ export function ContactCTA({ business }: { business: { phone: string; secondaryP
           <div className="flex flex-wrap gap-3">
             <a href={`tel:${business.phone}`} className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-walnut"><PhoneCall className="h-4 w-4" /> Call now</a>
             <a href={`tel:${business.secondaryPhone}`} className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-transparent px-5 py-3 text-sm font-semibold text-white"><PhoneCall className="h-4 w-4" /> Call second number</a>
-            <a href={whatsappUrl(undefined, business.whatsappPhone)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-transparent px-5 py-3 text-sm font-semibold text-white"><MessageCircleMore className="h-4 w-4" /> WhatsApp</a>
+            <a href={whatsappUrl(undefined, business.whatsappPhone)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-transparent px-5 py-3 text-sm font-semibold text-white"><WhatsAppIcon className="h-4 w-4" /> WhatsApp</a>
           </div>
         </div>
       </div>

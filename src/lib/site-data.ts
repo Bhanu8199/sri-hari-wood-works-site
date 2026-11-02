@@ -98,7 +98,197 @@ export const featuredServices: Service[] = [
   }
 ];
 
-export const featuredProjects: Project[] = [];
+export const featuredProjects: Project[] = [
+  {
+    slug: 'timber-double-doors',
+    title: 'Timber Double Doors',
+    category: 'Doors & Windows',
+    description: 'A warm wood-framed double door with mesh panels and detailed lower panels.',
+    coverImage: '/images/timber-double-doors.webp',
+    coverImageWidth: 768,
+    coverImageHeight: 1711
+  },
+  {
+    slug: 'corner-modular-kitchen',
+    title: 'Corner Modular Kitchen',
+    category: 'Kitchens',
+    description: 'Corner kitchen cabinetry with contrasting brown and cream doors and wood trim.',
+    coverImage: '/images/corner-modular-kitchen.webp',
+    coverImageWidth: 768,
+    coverImageHeight: 1711
+  },
+  {
+    slug: 'custom-kitchen-storage',
+    title: 'Custom Kitchen Storage',
+    category: 'Kitchens',
+    description: 'Custom kitchen cabinets with mixed finishes and dedicated storage.',
+    coverImage: '/images/custom-kitchen-storage.webp',
+    coverImageWidth: 1705,
+    coverImageHeight: 768
+  },
+  {
+    slug: 'full-wall-kitchen-cabinets',
+    title: 'Full-Wall Kitchen Cabinets',
+    category: 'Kitchens',
+    description: 'Full-width upper cabinets paired with dark framed windows and practical storage.',
+    coverImage: '/images/full-wall-kitchen-cabinets.webp',
+    coverImageWidth: 2173,
+    coverImageHeight: 724
+  },
+  {
+    slug: 'wardrobe-and-entry-doors',
+    title: 'Wardrobe and Entry Doors',
+    category: 'Wardrobes & Doors',
+    description: 'Built-in wardrobe storage alongside a matching dark wood entry door.',
+    coverImage: '/images/wardrobe-and-entry-doors.webp',
+    coverImageWidth: 1708,
+    coverImageHeight: 768
+  },
+  {
+    slug: 'living-room-tv-unit',
+    title: 'Living Room TV Unit',
+    category: 'Custom Woodwork',
+    description: 'A custom TV wall unit with warm wood accents, display shelving, and concealed storage.',
+    coverImage: '/images/living-room-tv-unit.webp',
+    coverImageWidth: 768,
+    coverImageHeight: 840
+  },
+  {
+    slug: 'timber-entry-door',
+    title: 'Timber Entry Door',
+    category: 'Doors & Windows',
+    description: 'A handcrafted timber entrance with coordinating framed side panels.',
+    coverImage: '/images/timber-entry-door.webp',
+    coverImageWidth: 768,
+    coverImageHeight: 1032
+  },
+  {
+    slug: 'wooden-side-table',
+    title: 'Wooden Side Table',
+    category: 'Furniture',
+    description: 'A solid wood side table featuring turned legs and detailed traditional trim.',
+    coverImage: '/images/wooden-side-table.webp',
+    coverImageWidth: 768,
+    coverImageHeight: 890
+  },
+  {
+    slug: 'wooden-cot',
+    title: 'Wooden Cot',
+    category: 'Cots & Furniture',
+    description: 'A durable wooden cot with a polished finish and decorative detailing.',
+    coverImage: '/images/wooden-cot.webp',
+    coverImageWidth: 1026,
+    coverImageHeight: 768
+  },
+  {
+    slug: 'carved-wooden-bench',
+    title: 'Carved Wooden Bench',
+    category: 'Furniture',
+    description: 'A polished wooden bench with carved accents and sturdy traditional construction.',
+    coverImage: '/images/carved-wooden-bench.webp',
+    coverImageWidth: 1152,
+    coverImageHeight: 768
+  },
+  {
+    slug: 'dining-table-set',
+    title: 'Dining Table Set',
+    category: 'Furniture',
+    description: 'A custom wooden dining table paired with coordinating chairs in a natural finish.',
+    coverImage: '/images/dining-table-set.webp',
+    coverImageWidth: 1774,
+    coverImageHeight: 887
+  },
+  {
+    slug: 'dining-table-with-bench',
+    title: 'Dining Table with Bench',
+    category: 'Furniture',
+    description: 'A wooden dining table set with matching chairs and a long dining bench.',
+    coverImage: '/images/dining-table-with-bench.webp',
+    coverImageWidth: 1774,
+    coverImageHeight: 887
+  },
+  {
+    slug: 'bathroom-storage-cabinet',
+    title: 'Bathroom Storage Cabinet',
+    category: 'Custom Woodwork',
+    description: 'Dark wood cabinetry fitted around a window to provide practical bathroom storage.',
+    coverImage: '/images/bathroom-storage-cabinet.webp',
+    coverImageWidth: 1793,
+    coverImageHeight: 877
+  },
+  {
+    slug: 'entertainment-wall-unit',
+    title: 'Entertainment Wall Unit',
+    category: 'Custom Woodwork',
+    description: 'A custom entertainment unit combining display shelves, a media console, and storage.',
+    coverImage: '/images/entertainment-wall-unit.webp',
+    coverImageWidth: 1424,
+    coverImageHeight: 1104
+  },
+  {
+    slug: 'wooden-lounge-chairs',
+    title: 'Wooden Lounge Chairs',
+    category: 'Furniture',
+    description: 'A pair of polished wooden lounge chairs with shaped arms and slatted seats.',
+    coverImage: '/images/wooden-lounge-chairs.webp',
+    coverImageWidth: 1620,
+    coverImageHeight: 971
+  },
+  {
+    slug: 'ornate-wooden-cot',
+    title: 'Ornate Wooden Cot',
+    category: 'Cots & Furniture',
+    description: 'A traditional wooden cot featuring detailed carved panels and turned posts.',
+    coverImage: '/images/ornate-wooden-cot.webp',
+    coverImageWidth: 1774,
+    coverImageHeight: 887
+  },
+  {
+    slug: 'carved-double-entry-door',
+    title: 'Carved Double Entry Door',
+    category: 'Doors & Windows',
+    description: 'A handcrafted double entry door with decorative glass side panels and carved woodwork.',
+    coverImage: '/images/carved-double-entry-door.webp',
+    coverImageWidth: 768,
+    coverImageHeight: 840
+  },
+  {
+    slug: 'wooden-living-room-sideboard',
+    title: 'Wooden Living Room Sideboard',
+    category: 'Furniture',
+    description: 'A custom wooden sideboard with a stone feature wall and detailed cabinet doors.',
+    coverImage: '/images/wooden-living-room-sideboard.webp',
+    coverImageWidth: 1203,
+    coverImageHeight: 768
+  },
+  {
+    slug: 'vented-wood-storage-cabinet',
+    title: 'Vented Wood Storage Cabinet',
+    category: 'Custom Woodwork',
+    description: 'A long wooden storage cabinet with paneled doors and built-in ventilation grilles.',
+    coverImage: '/images/vented-wood-storage-cabinet.webp',
+    coverImageWidth: 1708,
+    coverImageHeight: 768
+  },
+  {
+    slug: 'wall-mounted-kitchen-cabinets',
+    title: 'Wall-Mounted Kitchen Cabinets',
+    category: 'Kitchens',
+    description: 'Full-width wall-mounted kitchen cabinets with matching wood trim and paneled doors.',
+    coverImage: '/images/wall-mounted-kitchen-cabinets.webp',
+    coverImageWidth: 1708,
+    coverImageHeight: 768
+  },
+  {
+    slug: 'wooden-modular-kitchen',
+    title: 'Wooden Modular Kitchen',
+    category: 'Kitchens',
+    description: 'A modular corner kitchen with polished wooden cabinetry, dark counters, and integrated storage.',
+    coverImage: '/images/wooden-modular-kitchen.webp',
+    coverImageWidth: 1708,
+    coverImageHeight: 768
+  }
+];
 
 export const faqs: FAQ[] = [
   {

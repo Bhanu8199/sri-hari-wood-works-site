@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import { Clock3, Mail, MapPin, MessageCircleMore, PhoneCall } from 'lucide-react';
+import { Clock3, Mail, MapPin, PhoneCall } from 'lucide-react';
 import { whatsappUrl } from '@/lib/site-data';
 import { getBusinessHours, getBusinessProfile } from '@/lib/business-settings';
+import { WhatsAppIcon } from '@/components/site/whatsapp-icon';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -46,7 +47,7 @@ export default async function ContactPage() {
           <article className="rounded-3xl border border-border bg-white p-6 shadow-soft">
             <div className="flex items-center gap-3">
               <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-cream text-walnut">
-                <MessageCircleMore className="h-5 w-5" aria-hidden="true" />
+                <WhatsAppIcon className="h-5 w-5" />
               </span>
               <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-olive">WhatsApp</h2>
             </div>
@@ -55,9 +56,9 @@ export default async function ContactPage() {
               href={whatsappUrl('Hello Sri Hari Wood Works, I would like to enquire about your woodworking services. Please contact me to discuss my requirements.', business.whatsappPhone)}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1eae54] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#167a39]"
+              className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#25D366]/60 bg-white px-5 py-3 text-sm font-semibold text-[#167a39] transition hover:bg-[#effbf3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#167a39]"
             >
-              <MessageCircleMore className="h-4 w-4" aria-hidden="true" />
+              <WhatsAppIcon className="h-4 w-4" />
               WhatsApp us
             </a>
           </article>

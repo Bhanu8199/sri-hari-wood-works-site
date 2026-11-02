@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { featuredProjects, whatsappUrl } from '@/lib/site-data';
 import { getBusinessProfile } from '@/lib/business-settings';
+import { WhatsAppIcon } from '@/components/site/whatsapp-icon';
 
 export async function generateStaticParams() {
   return featuredProjects.map((project) => ({ slug: project.slug }));
@@ -38,9 +39,16 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
 
       <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <div className="relative h-[420px] overflow-hidden rounded-3xl border border-border bg-white shadow-soft">
+          <div className="relative h-[420px] overflow-hidden rounded-3xl border border-border bg-[#f7f2e9] shadow-soft">
             {project.coverImage ? (
-              <Image src={project.coverImage} alt={project.title} fill className="object-cover" />
+              <Image
+                src={project.coverImage}
+                alt={project.title}
+                fill
+                sizes="(min-width: 1024px) 55vw, 100vw"
+                priority
+                className="object-contain p-2"
+              />
             ) : (
               <div className="flex h-full flex-col items-center justify-center gap-3 bg-cream text-walnut">
                 <span>Owner-approved project photo coming soon</span>
@@ -54,9 +62,16 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
           <h1 className="text-4xl font-semibold text-walnut">{project.title}</h1>
           <p className="text-base leading-7 text-slate-700">{project.description}</p>
           {project.completedAt ? <p className="text-sm text-slate-600">Completed: {project.completedAt}</p> : null}
-          <div className="flex flex-wrap gap-3">
-            <a href={`tel:${business.phone}`} className="btn-primary">Ask about a similar project</a>
-            <a href={whatsappUrl(`Hello Sri Hari Wood Works, I would like to enquire about ${project.title}. Please contact me to discuss my requirements.`, business.whatsappPhone)} target="_blank" rel="noreferrer" className="btn-secondary">WhatsApp us</a>
+          <div>
+            <a
+              href={whatsappUrl(`Hello Sri Hari Wood Works, I would like to enquire about a similar ${project.category.toLowerCase()} project to ${project.title}. Please contact me to discuss my requirements.`, business.whatsappPhone)}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-secondary inline-flex items-center gap-2"
+            >
+              <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
+              Ask about a similar product on WhatsApp
+            </a>
           </div>
         </div>
       </div>

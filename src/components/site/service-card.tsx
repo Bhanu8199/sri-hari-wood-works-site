@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { ImageOff } from 'lucide-react';
 import { whatsappUrl } from '@/lib/site-data';
+import { WhatsAppIcon } from '@/components/site/whatsapp-icon';
 import type { Service } from '@/types';
 
 export function ServiceCard({ service, whatsappPhone }: { service: Service; whatsappPhone?: string }) {
@@ -49,9 +50,10 @@ export function ServiceCard({ service, whatsappPhone }: { service: Service; what
             href={whatsappUrl(`Hello Sri Hari Wood Works, I would like to enquire about ${service.title}. Please contact me to discuss my requirements.`, whatsappPhone)}
             target="_blank"
             rel="noreferrer"
-            className="btn-secondary"
+            className="btn-secondary gap-2"
           >
-            WhatsApp
+            <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
+            Get Estimate on WhatsApp
           </a>
         </div>
       </div>

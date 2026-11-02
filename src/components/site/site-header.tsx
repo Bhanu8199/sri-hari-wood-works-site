@@ -1,13 +1,26 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef } from 'react';
-import { Menu, MessageCircleMore } from 'lucide-react';
-import { formatPhoneNumber, whatsappUrl } from '@/lib/site-data';
+import { useEffect, useRef } from 'react';
+import { Menu } from 'lucide-react';
+import { whatsappUrl } from '@/lib/site-data';
+import { WhatsAppIcon } from '@/components/site/whatsapp-icon';
 import type { BusinessProfile } from '@/types';
 
 export function SiteHeader({ business }: { business: BusinessProfile }) {
   const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+
+  useEffect(() => {
+    function closeMenuOnOutsideClick(event: PointerEvent) {
+      const menu = mobileMenuRef.current;
+      if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) {
+        menu.open = false;
+      }
+    }
+
+    document.addEventListener('pointerdown', closeMenuOnOutsideClick);
+    return () => document.removeEventListener('pointerdown', closeMenuOnOutsideClick);
+  }, []);
 
   function closeMobileMenu() {
     if (mobileMenuRef.current) {
@@ -45,7 +58,7 @@ export function SiteHeader({ business }: { business: BusinessProfile }) {
             rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-[#25D366]/60 bg-white px-5 py-3 text-sm font-semibold text-[#167a39] transition hover:bg-[#effbf3]"
           >
-            <MessageCircleMore className="h-4 w-4" aria-hidden="true" /> WhatsApp
+            <WhatsAppIcon className="h-4 w-4" /> WhatsApp
           </a>
         </div>
 
@@ -64,9 +77,11 @@ export function SiteHeader({ business }: { business: BusinessProfile }) {
             ].map(([label, href]) => (
               <Link key={href} href={href} onClick={closeMobileMenu} className="block text-sm font-medium text-walnut">{label}</Link>
             ))}
-            <a href={`tel:${business.phone}`} onClick={closeMobileMenu} className="block text-sm font-semibold text-walnut">Call {formatPhoneNumber(business.phone)}</a>
-            <a href={`tel:${business.secondaryPhone}`} onClick={closeMobileMenu} className="block text-sm font-semibold text-walnut">Call {formatPhoneNumber(business.secondaryPhone)}</a>
-            <a href={whatsappUrl(undefined, business.whatsappPhone)} onClick={closeMobileMenu} target="_blank" rel="noreferrer" className="block text-sm font-semibold text-[#167a39]">WhatsApp</a>
+            <a href={`tel:${business.phone}`} onClick={closeMobileMenu} className="block text-sm font-medium text-walnut">Call Contact 1</a>
+            <a href={`tel:${business.secondaryPhone}`} onClick={closeMobileMenu} className="block text-sm font-medium text-walnut">Call Contact 2</a>
+            <a href={whatsappUrl(undefined, business.whatsappPhone)} onClick={closeMobileMenu} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-semibold text-[#167a39]">
+              <WhatsAppIcon className="h-4 w-4" /> WhatsApp
+            </a>
           </nav>
         </details>
       </div>

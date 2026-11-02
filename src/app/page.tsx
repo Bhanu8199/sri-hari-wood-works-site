@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { HeroSection } from '@/components/site/hero-section';
 import { ServiceCard } from '@/components/site/service-card';
-import { ServiceImageGallery } from '@/components/site/service-image-gallery';
-import { ReviewSection } from '@/components/site/review-section';
+import { ProjectCard } from '@/components/site/project-card';
+import { GoogleBusinessSection } from '@/components/site/google-business-section';
 import { ContactCTA } from '@/components/site/contact-cta';
 import { ExperienceBadge } from '@/components/site/experience-badge';
 import { FAQAccordion } from '@/components/site/faq-accordion';
 import { ArrowUpRight, Hammer, LayoutGrid, MapPinned } from 'lucide-react';
-import { featuredServices, faqs } from '@/lib/site-data';
+import { featuredProjects, faqs } from '@/lib/site-data';
 import { getBusinessProfile, getPublishedServices } from '@/lib/business-settings';
 
 export default async function HomePage() {
@@ -60,12 +60,18 @@ export default async function HomePage() {
           <div className="flex items-end justify-between gap-4 pb-8">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-olive">Our work</p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-walnut md:text-4xl">Explore our specialties</h2>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-walnut md:text-4xl">Recent project photos</h2>
             </div>
             <Link href="/projects" className="text-sm font-medium text-walnut underline underline-offset-4">Explore all our work</Link>
           </div>
 
-          <ServiceImageGallery services={featuredServices} />
+          <div className="columns-1 gap-6 sm:columns-2 lg:columns-3">
+            {featuredProjects.map((project, index) => (
+              <div key={project.slug} className="mb-6 break-inside-avoid">
+                <ProjectCard project={project} priority={index === 0} />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -104,7 +110,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <ReviewSection reviews={[]} />
+      <GoogleBusinessSection googleBusinessUrl={business.googleBusinessUrl} />
 
       <section className="bg-white py-16">
         <div className="container-shell max-w-5xl">
@@ -119,17 +125,17 @@ export default async function HomePage() {
       <ContactCTA business={business} />
 
       <section className="container-shell pb-16">
-        <div className="rounded-3xl border border-border bg-white p-8 shadow-soft">
+        <div className="rounded-3xl border border-border bg-white p-5 shadow-soft sm:p-8">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-olive">Shop address</p>
-            <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2">
-              <h2 className="text-2xl font-semibold text-walnut">{business.address}</h2>
-              <span aria-hidden="true" className="text-walnut">-</span>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-olive sm:text-sm sm:tracking-[0.2em]">Shop address</p>
+            <div className="mt-2 flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
+              <h2 className="break-words text-base font-semibold leading-snug text-walnut sm:text-xl md:text-2xl">{business.address}</h2>
+              <span aria-hidden="true" className="hidden text-walnut sm:inline">-</span>
               <a href={business.directionsUrl} target="_blank" rel="noreferrer" className="btn-primary shrink-0">
                 Get directions <ArrowUpRight className="ml-1 inline h-4 w-4" aria-hidden="true" />
               </a>
             </div>
-            <p className="mt-3 max-w-3xl leading-7 text-slate-700">Serving customers across {business.serviceArea}. Project feasibility and any travel charges will be discussed during the estimate process.</p>
+            <p className="mt-3 text-sm leading-6 text-slate-700 sm:text-base sm:leading-7">Serving customers across {business.serviceArea}. Project feasibility and any travel charges will be discussed during the estimate process.</p>
           </div>
         </div>
       </section>
