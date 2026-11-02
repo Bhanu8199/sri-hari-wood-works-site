@@ -10,7 +10,7 @@ export default function PrivacyPage() {
     <div className="container-shell py-16">
       <div className="mx-auto max-w-4xl rounded-3xl border border-border bg-white p-8 shadow-soft">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-olive">Privacy policy</p>
-        <h1 className="mt-3 text-4xl font-semibold text-walnut">Privacy notice</h1>
+        <h1 className="mt-3 text-4xl font-semibold text-walnut">Privacy policy</h1>
         <p className="mt-3 text-sm text-slate-600">Last updated: November 2, 2026</p>
         <div className="mt-6 space-y-8 text-base leading-7 text-slate-700">
           <section>
